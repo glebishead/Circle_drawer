@@ -1,23 +1,23 @@
 import sys
 from random import randrange
-from PyQt5 import uic
+from UI import Ui_MainWindow
 from PyQt5.QtWidgets import QMainWindow, QApplication
 from PyQt5.QtGui import QPainter, QColor
 
 
-class CircleDrawer(QMainWindow):
+class CircleDrawer(QMainWindow, Ui_MainWindow):
 	def __init__(self):
 		super().__init__()
-		uic.loadUi('UI.ui', self)
+		self.setupUi(self)
 		self.setFixedSize(self.size())
 		self.pushButton.clicked.connect(self.draw_circle)
 		
 		self.flag = False
 	
 	def draw(self):
-		self.qp.setPen(QColor(255, 255, 0))
+		self.qp.setPen(QColor(*[randrange(255) for _ in range(3)]))
 		n = randrange(10, 100)
-		self.qp.drawEllipse(randrange(10, 500), randrange(10, 500), 2 * n, 2 * n)
+		self.qp.drawEllipse(randrange(10, 550), randrange(10, 550), 2 * n, 2 * n)
 	
 	def draw_circle(self):
 		self.flag = True
